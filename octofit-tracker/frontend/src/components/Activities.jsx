@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { fetchCollection } from '../api';
 
+// Codespaces endpoint: -8000.app.github.dev/api/activities/
 function Activities() {
   const [activities, setActivities] = useState([]);
   const [status, setStatus] = useState('loading');
