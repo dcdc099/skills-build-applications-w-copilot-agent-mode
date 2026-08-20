@@ -1,23 +1,7 @@
-import express from 'express';
-import apiRouter from './routes/api.js';
-import { connectDatabase, default as database } from './config/database.js';
-
-const app = express();
-const port = Number(process.env.PORT) || 8000;
-
-app.use(express.json());
-
-app.get('/api/health', (_request, response) => {
-  response.json({ status: 'ok', database: database.readyState === 1 ? 'connected' : 'disconnected' });
-});
-
-app.use('/api', apiRouter);
-
-app.use((_request, response) => {
-  response.status(404).json({ error: 'Route not found' });
-});
+import { connectDatabase } from './config/database.js';
+import { app, baseUrl, port } from './server.js';
 
 app.listen(port, () => {
-  console.log(`OctoFit API listening on port ${port}`);
+  console.log(`OctoFit API listening at ${baseUrl}`);
   void connectDatabase();
 });
